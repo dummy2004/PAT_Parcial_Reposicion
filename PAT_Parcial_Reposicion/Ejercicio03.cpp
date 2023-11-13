@@ -1,34 +1,29 @@
 #include "Ejercicio03.h"
-#include <unordered_set>
 
 Node<int>* Ejercicio03::detectCycle(Node<int>* head)
 {
-    Node<int>* slow = head;
-    Node<int>* fast = head;
+    Node<int>* corto = head;
+    Node<int>* large = head;
 
-    while (fast != nullptr && fast->next != nullptr)
-    {
-        slow = slow->next;
-        fast = fast->next->next;
+    while (corto != nullptr && large != nullptr && large->next != nullptr) {
+        corto = corto->next;
+        large = large->next->next;
 
-        if (slow == fast)
-        {
+        if (corto == large) {
             break;
         }
     }
 
-    if (fast == nullptr || fast->next == nullptr)
-    {
+    if (large == nullptr || large->next == nullptr) {
         return nullptr;
     }
 
-    slow = head;
+    corto = head;
 
-    while (slow != fast)
-    {
-        slow = slow->next;
-        fast = fast->next;
+    while (corto != large) {
+        corto = corto->next;
+        large = large->next;
     }
 
-    return slow;
+    return large;
 }

@@ -4,5 +4,6 @@ struct Node
 {
 	T value;
 	Node* next;
+
 };
 
